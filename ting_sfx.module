@@ -99,21 +99,27 @@ function ting_sfx_get_markup($entity = NULL) {
     foreach ($entity->relations as $relation) {
       if ( (isset($relation_types[$relation->type])) && ($sfx_url = ting_sfx_get_open_url($relation->uri)) ) {
         $markup = array(
-         '#prefix' => '<div class="sfx-link">',
-         '#suffix' => '</div>',
-         '#markup' => l(ting_sfx_get_logo() . '<span>' . $relation_types[$relation->type] . '</span>',
-            $sfx_url, array(
-            'attributes' => array('class' => array('ting_sfx_group',),
-              'target' => '_new',
-              'name' => $relation->type),
+          '#theme' => 'link',
+          '#text' => '<i class="icon-white icon-sfx"></i>&nbsp;' . t($relation_types[$relation->type]),
+          '#path' => $sfx_url,
+          '#options' => array(
+            'attributes' => array(
+              'class' => array(
+                'btn',
+                'btn-artesis-turquoise',
+                'ting_sfx_group',
+              ),
+              'target' => '_blank',
+              'name' => $relation->type,
+            ),
             'html' => TRUE,
-           )),
-         );
+            'absolute' => TRUE,
+          )
+        );
         break;
       }
     }
   }
-
   return $markup;
 }
 
