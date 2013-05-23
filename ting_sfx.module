@@ -96,7 +96,7 @@ function ting_sfx_get_markup($entity = NULL) {
   $markup = array();
   if (is_object($entity)) {
     $relation_types = ting_sfx_inline();
-    foreach ($entity->relations as $relation) {
+    foreach ($entity->getRelations() as $relation) {
       if ( (isset($relation_types[$relation->type])) && ($sfx_url = ting_sfx_get_open_url($relation->uri)) ) {
         $markup = array(
          '#prefix' => '<div class="sfx-link">',
