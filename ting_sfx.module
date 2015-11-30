@@ -115,7 +115,7 @@ function ting_sfx_get_markup($entity = NULL) {
             'html' => TRUE,
             'absolute' => TRUE,
           ),
-          '#weight' => 5,
+          '#weight' => 108,
         );
         break;
       }
