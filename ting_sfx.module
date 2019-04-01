@@ -132,6 +132,7 @@ function ting_sfx_get_open_url($uri) {
     $ret = str_replace('_BASEURL_', $baseurl, $uri);
     $parts = parse_url($ret);
     $query = ting_sfx_encode_dk($parts['query']);
+    $query = implode('&', array($query, ting_sfx_attach_language()));
     $port = isset($parts['port']) ? ':' . $parts['port'] : '';
     $ret = $parts['scheme'] . '://' . $parts['host'] . $port . $parts['path'] . '?' . $query;
   }
@@ -140,6 +141,24 @@ function ting_sfx_get_open_url($uri) {
   }
 
   return $ret;
+}
+
+/**
+ * Format language param.
+ */
+function ting_sfx_attach_language() {
+  global $language;
+
+  switch ($language->language) {
+    case 'en':
+      $lang_code = 'eng';
+      break;
+    default:
+      $lang_code = 'dan';
+      break;
+  }
+
+  return 'req.language=' . $lang_code;
 }
 
 /**
